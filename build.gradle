@@ -1,0 +1,30 @@
+fun group(s: String) {
+
+}
+
+plugins {
+    id ("java")
+}
+
+group ("com.example")
+version ("1.0-SNAPSHOT")
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation ("com.google.code.gson:gson:2.8.8")
+}
+
+jar {
+    manifest {
+        attributes(
+            ("Main-Class': 'Main")
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with jar
+}
